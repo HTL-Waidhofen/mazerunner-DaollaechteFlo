@@ -66,11 +66,15 @@ namespace objektorientierung
                     Rechteck r=(Rechteck)lstrechtecke.SelectedItem;
                     r.breite= breite;
                     r.laenge= laenge;
-                }else
+                    lstrechtecke.Items.Refresh();
+
+                }
+                else
                 {
                     Rechteck r = new Rechteck(laenge, breite);
                     lstrechtecke.Items.Add(r);
                     rechtecke.Add(r);
+                    lstrechtecke.Items.Refresh();
                 }
                 
                 tbxbreite.Clear();
