@@ -91,6 +91,8 @@ namespace objektorientierung
                 
                 tbxbreite.Clear();
                 tbxlaenge.Clear();
+                tbxx.Clear();
+                tbxy.Clear();
             }
             catch(FormatException) 
             {
