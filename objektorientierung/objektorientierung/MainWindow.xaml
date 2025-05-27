@@ -16,6 +16,14 @@
                 <Label Width="100">Breite:</Label>
                 <TextBox x:Name="tbxbreite" Width="100"></TextBox>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Label Width="100">x:</Label>
+                <TextBox x:Name="tbxx" Width="100"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Label Width="100">y:</Label>
+                <TextBox x:Name="tbxy" Width="100"></TextBox>
+            </StackPanel>
             <StackPanel HorizontalAlignment="Left">
                 <Button x:Name="btnSpeichern" Margin="10" Width="100"  Click="btnSpeichern_Click">Speicher</Button>
                 <ListView x:Name="lstrechtecke" SelectionChanged="lstrechtecke_SelectionChanged" Height="200" Width="200" Margin="10"></ListView>
