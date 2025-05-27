@@ -6,19 +6,27 @@
         xmlns:local="clr-namespace:objektorientierung"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="10">
-            <Label Width="100">Höhe:</Label>
-            <TextBox x:Name="tbxlaenge" Width="100"></TextBox>
+    <StackPanel Orientation="Horizontal">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Label Width="100">Höhe:</Label>
+                <TextBox x:Name="tbxlaenge" Width="100"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Label Width="100">Breite:</Label>
+                <TextBox x:Name="tbxbreite" Width="100"></TextBox>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left">
+                <Button x:Name="btnSpeichern" Margin="10" Width="100"  Click="btnSpeichern_Click">Speicher</Button>
+                <ListView x:Name="lstrechtecke" SelectionChanged="lstrechtecke_SelectionChanged" Height="200" Width="200" Margin="10"></ListView>
+            </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="10">
-            <Label Width="100">Breite:</Label>
-            <TextBox x:Name="tbxbreite" Width="100"></TextBox>
-        </StackPanel>
-        <StackPanel HorizontalAlignment="Left">
-            <Button x:Name="btnSpeichern" Margin="10" Width="100"  Click="btnSpeichern_Click">Speicher</Button>
-            <ListView x:Name="lstrechtecke" SelectionChanged="lstrechtecke_SelectionChanged" Height="200" Width="200" Margin="10"></ListView>
-        </StackPanel>
+        
 
+        <Canvas Background="Blue"  Width="400" Height="400" x:Name="myCanvas">
+            
+            
+        </Canvas>
+        
     </StackPanel>
 </Window>

@@ -45,7 +45,7 @@ namespace objektorientierung
         public MainWindow()
         {
             InitializeComponent();
-            
+           
         }
 
         private void TextBox_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -75,6 +75,15 @@ namespace objektorientierung
                     lstrechtecke.Items.Add(r);
                     rechtecke.Add(r);
                     lstrechtecke.Items.Refresh();
+                    Rectangle rectangle = new Rectangle();
+                    rectangle.StrokeThickness = 2;
+                    rectangle.Stroke = Brushes.Red;
+                    
+                    rectangle.Width = breite;
+                    rectangle.Height = laenge;
+                    
+                    myCanvas.Children.Add(rectangle);
+                    
                 }
                 
                 tbxbreite.Clear();
