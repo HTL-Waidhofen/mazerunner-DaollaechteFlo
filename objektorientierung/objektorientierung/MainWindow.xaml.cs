@@ -75,14 +75,7 @@ namespace objektorientierung
                     lstrechtecke.Items.Add(r);
                     rechtecke.Add(r);
                     lstrechtecke.Items.Refresh();
-                    Rectangle rectangle = new Rectangle();
-                    rectangle.StrokeThickness = 2;
-                    rectangle.Stroke = Brushes.Red;
-                    
-                    rectangle.Width = breite;
-                    rectangle.Height = laenge;
-                    
-                    myCanvas.Children.Add(rectangle);
+                   
                     
                 }
                 
@@ -101,6 +94,24 @@ namespace objektorientierung
            Rechteck r=(Rechteck)this.lstrechtecke.SelectedItem;
              tbxlaenge.Text= r.laenge.ToString();
             tbxbreite.Text= r.breite.ToString();
+        }
+
+        private void btnreckteckeloeschen(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnrechteckezeichnen(object sender, RoutedEventArgs e)
+        {
+         
+            
+            Rectangle rectangle = new Rectangle();
+            rectangle.StrokeThickness = 2;
+            rectangle.Stroke = Brushes.Red;
+            rectangle.Width = breite;
+            rectangle.Height = laenge;
+            rectangle.Margin = new Thickness(5);
+            myCanvas.Children.Add(rectangle);
         }
     }
 }

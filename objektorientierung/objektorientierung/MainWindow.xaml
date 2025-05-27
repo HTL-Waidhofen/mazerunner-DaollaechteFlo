@@ -19,6 +19,9 @@
             <StackPanel HorizontalAlignment="Left">
                 <Button x:Name="btnSpeichern" Margin="10" Width="100"  Click="btnSpeichern_Click">Speicher</Button>
                 <ListView x:Name="lstrechtecke" SelectionChanged="lstrechtecke_SelectionChanged" Height="200" Width="200" Margin="10"></ListView>
+                <Button x:Name="btnLöschen" Margin="5" Width="150" Click="btnreckteckeloeschen"  >Rechtecke Löschen</Button>
+
+                <Button x:Name="btnZeichnen" Margin="5" Width="150" Click="btnrechteckezeichnen"  >Rechtecke Zeichnen</Button>
             </StackPanel>
         </StackPanel>
         
