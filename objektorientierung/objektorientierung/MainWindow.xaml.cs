@@ -37,7 +37,7 @@ namespace objektorientierung
         }
         public override string ToString()
         {
-            return $"Rechteck: {laenge}x{breite}";
+            return $"Rechteck: {laenge}x{breite} [{x}] [{y}]";
         }
     }
 
@@ -59,6 +59,7 @@ namespace objektorientierung
                 int y = int.Parse(walls[i].Split(',')[1])*10;
                 Rechteck r = new Rechteck(10, 10, x, y);
                 rechtecke.Add(r);
+                lstrechtecke.Items.Add(r);
             }
         }
 
@@ -76,9 +77,9 @@ namespace objektorientierung
                 string breiteStr = this.tbxbreite.Text;
                 double breite = double.Parse(breiteStr);
                 string xStr = this.tbxx.Text;
-                double x = double.Parse(laengeStr);
+                double x = double.Parse(xStr);
                 string yStr = this.tbxy.Text;
-                double y = double.Parse(breiteStr);
+                double y = double.Parse(yStr);
                 if (lstrechtecke.SelectedItem != null)
                 {
                     Rechteck r=(Rechteck)lstrechtecke.SelectedItem;
@@ -116,11 +117,13 @@ namespace objektorientierung
            Rechteck r=(Rechteck)this.lstrechtecke.SelectedItem;
              tbxlaenge.Text= r.laenge.ToString();
             tbxbreite.Text= r.breite.ToString();
+            tbxx.Text= r.x.ToString();
+            tbxy.Text= r.y.ToString();
         }
 
         private void btnreckteckeloeschen(object sender, RoutedEventArgs e)
         {
-
+            myCanvas.Children.Clear();
         }
 
         private void btnrechteckezeichnen(object sender, RoutedEventArgs e)
