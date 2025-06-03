@@ -34,7 +34,7 @@
         </StackPanel>
         
 
-        <Canvas Background="Blue"  Width="400" Height="400" x:Name="myCanvas">
+        <Canvas Background="White"  Width="400" Height="400" x:Name="myCanvas">
             
             
         </Canvas>

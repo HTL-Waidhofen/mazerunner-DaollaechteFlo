@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,7 +50,16 @@ namespace objektorientierung
         public MainWindow()
         {
             InitializeComponent();
-           
+            StreamReader reader = new StreamReader("wallsList.txt");
+            string wallist = reader.ReadToEnd();
+            string[] walls = wallist.Split( '\n' );
+            for(int i =0; i< walls.Length; i++)
+            {
+                int x = int.Parse(walls[i].Split(',')[0])*10;
+                int y = int.Parse(walls[i].Split(',')[1])*10;
+                Rechteck r = new Rechteck(10, 10, x, y);
+                rechtecke.Add(r);
+            }
         }
 
         private void TextBox_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
