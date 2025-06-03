@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:objektorientierung"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="850" Width="1000"
+        KeyDown="Window_KeyDown"
+        >
     <StackPanel Orientation="Horizontal">
-        <StackPanel>
+        <StackPanel x:Name="stp_sidebar" >
             <StackPanel Orientation="Horizontal" Margin="10">
                 <Label Width="100">Höhe:</Label>
                 <TextBox x:Name="tbxlaenge" Width="100"></TextBox>
@@ -30,14 +32,17 @@
                 <Button x:Name="btnLöschen" Margin="5" Width="150" Click="btnreckteckeloeschen"  >Rechtecke Löschen</Button>
 
                 <Button x:Name="btnZeichnen" Margin="5" Width="150" Click="btnrechteckezeichnen"  >Rechtecke Zeichnen</Button>
+                
             </StackPanel>
         </StackPanel>
-        
+        <StackPanel>
+            <Button x:Name="Spielstarten" Margin="5" Width="150" Click="btnspielstarten" >Spiel Starten</Button>
+            <Canvas Background="White"  Width="400" Height="400" x:Name="myCanvas">
 
-        <Canvas Background="White"  Width="400" Height="400" x:Name="myCanvas">
-            
-            
-        </Canvas>
+
+            </Canvas>
+        </StackPanel>
+       
         
     </StackPanel>
 </Window>

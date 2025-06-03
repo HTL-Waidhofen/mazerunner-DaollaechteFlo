@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 namespace objektorientierung
 {
+    
     class Rechteck 
     {
         public double laenge = 1;
@@ -41,12 +42,46 @@ namespace objektorientierung
         }
     }
 
+    class Spieler 
+    {
+        public int xplayer;
+        public int yplayer;
+        public Image image;
+        public Spieler()
+        {
+            xplayer = 1;
+            yplayer = 1;
+        }
+        public void Move(Key key)
+        {
+            if (key == Key.Left)
+            {
+                xplayer--;
+            } else if (key == Key.Right)
+            {
+                xplayer++;
+            } else if(key == Key.Up)
+            {
+                yplayer--;
+            }else if (key == Key.Down)
+            {
+                yplayer++;
+            }
+            Canvas.SetLeft(image, xplayer*MainWindow.GRID_SIZE);
+            Canvas.SetTop(image, yplayer*MainWindow.GRID_SIZE);
+        }
+
+    }
+
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         List<Rechteck> rechtecke = new List<Rechteck>();
+
+        Spieler spieler = new Spieler();
+        public static int GRID_SIZE = 25;
         public MainWindow()
         {
             InitializeComponent();
@@ -55,9 +90,9 @@ namespace objektorientierung
             string[] walls = wallist.Split( '\n' );
             for(int i =0; i< walls.Length; i++)
             {
-                int x = int.Parse(walls[i].Split(',')[0])*10;
-                int y = int.Parse(walls[i].Split(',')[1])*10;
-                Rechteck r = new Rechteck(10, 10, x, y);
+                int x = int.Parse(walls[i].Split(',')[0])* GRID_SIZE;
+                int y = int.Parse(walls[i].Split(',')[1])* GRID_SIZE;
+                Rechteck r = new Rechteck(GRID_SIZE, GRID_SIZE, x, y);
                 rechtecke.Add(r);
                 lstrechtecke.Items.Add(r);
             }
@@ -144,7 +179,31 @@ namespace objektorientierung
                 Canvas.SetLeft(rectangle, y);
                 Canvas.SetTop(rectangle, x);
             };
-            
+
+            spieler.image = new Image();
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri("image.png", UriKind.Relative);
+            bitmap.EndInit();
+            spieler.image.Source= bitmap;
+            spieler.image.Width = GRID_SIZE;
+            spieler.image.Height = GRID_SIZE;
+            Canvas.SetTop(spieler.image, spieler.yplayer* GRID_SIZE);
+            Canvas.SetLeft(spieler.image, spieler.xplayer*GRID_SIZE);
+           
+            myCanvas.Children.Add(spieler.image);
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            spieler.Move(e.Key);
+        }
+
+        private void btnspielstarten(object sender, RoutedEventArgs e)
+        {
+            if(stp_sidebar.Visibility == Visibility.Collapsed) stp_sidebar.Visibility = Visibility.Visible;
+            else stp_sidebar.Visibility = Visibility.Collapsed;
         }
     }
 }
