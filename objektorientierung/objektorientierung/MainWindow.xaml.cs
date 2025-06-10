@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace objektorientierung
 {
@@ -47,23 +48,28 @@ namespace objektorientierung
         public int xplayer;
         public int yplayer;
         public Image image;
+        public MainWindow.Direction direction=MainWindow.Direction.None;
         public Spieler()
         {
             xplayer = 1;
             yplayer = 1;
         }
-        public void Move(Key key)
+        public void SetDirection(MainWindow.Direction direction)
         {
-            if (key == Key.Left)
+            this.direction = direction;
+        }
+        public void Move()
+        {
+            if (direction == MainWindow.Direction.Left)
             {
                 xplayer--;
-            } else if (key == Key.Right)
+            } else if (direction == MainWindow.Direction.Right)
             {
                 xplayer++;
-            } else if(key == Key.Up)
+            } else if(direction == MainWindow.Direction.Up)
             {
                 yplayer--;
-            }else if (key == Key.Down)
+            }else if (direction == MainWindow.Direction.Down)
             {
                 yplayer++;
             }
@@ -78,12 +84,24 @@ namespace objektorientierung
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public enum Direction
+        {
+            Up,
+            Down,
+            Left,
+            Right,
+            None
+        }
+        DispatcherTimer timer = null;
         List<Rechteck> rechtecke = new List<Rechteck>();
 
         Spieler spieler = new Spieler();
         public static int GRID_SIZE = 25;
         public MainWindow()
         {
+            
+
             InitializeComponent();
             StreamReader reader = new StreamReader("wallsList.txt");
             string wallist = reader.ReadToEnd();
@@ -96,6 +114,13 @@ namespace objektorientierung
                 rechtecke.Add(r);
                 lstrechtecke.Items.Add(r);
             }
+        }
+
+
+        private void Update(object sender, EventArgs e)
+        {
+            spieler.Move();
+
         }
 
         private void TextBox_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -196,14 +221,33 @@ namespace objektorientierung
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-
-            spieler.Move(e.Key);
+            if(e.Key == Key.Left)
+            {
+                spieler.SetDirection(Direction.Left);
+            }else if(e.Key == Key.Right)
+            {
+                spieler.SetDirection(Direction.Right);
+            }else if(e.Key == Key.Up)
+            {
+                spieler.SetDirection(Direction.Up);
+            }else if (e.Key == Key.Down)
+            {
+                spieler.SetDirection(Direction.Down);
+            }
+           
         }
 
         private void btnspielstarten(object sender, RoutedEventArgs e)
         {
-            if(stp_sidebar.Visibility == Visibility.Collapsed) stp_sidebar.Visibility = Visibility.Visible;
-            else stp_sidebar.Visibility = Visibility.Collapsed;
+            if (stp_sidebar.Visibility == Visibility.Collapsed) stp_sidebar.Visibility = Visibility.Visible;
+            else
+            {
+                stp_sidebar.Visibility = Visibility.Collapsed;
+                timer = new DispatcherTimer(DispatcherPriority.Render);
+                timer.Interval = TimeSpan.FromMilliseconds(300);
+                timer.Tick += Update;
+                timer.Start();
+            }
         }
     }
 }
