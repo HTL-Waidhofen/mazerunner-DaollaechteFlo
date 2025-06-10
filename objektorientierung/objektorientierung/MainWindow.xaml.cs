@@ -49,10 +49,12 @@ namespace objektorientierung
         public int yplayer;
         public Image image;
         public MainWindow.Direction direction=MainWindow.Direction.None;
-        public Spieler()
+        public List<Rechteck> rechtecke;
+        public Spieler(List<Rechteck> rechtecke)
         {
             xplayer = 1;
             yplayer = 1;
+            this.rechtecke = rechtecke;
         }
         public void SetDirection(MainWindow.Direction direction)
         {
@@ -60,6 +62,10 @@ namespace objektorientierung
         }
         public void Move()
         {
+            int currentx = xplayer;
+            int currenty = yplayer;
+
+
             if (direction == MainWindow.Direction.Left)
             {
                 xplayer--;
@@ -72,6 +78,19 @@ namespace objektorientierung
             }else if (direction == MainWindow.Direction.Down)
             {
                 yplayer++;
+            }
+            bool collision = false;
+            foreach (Rechteck r in rechtecke)
+            {
+                if(r.x == xplayer*MainWindow.GRID_SIZE && r.y == yplayer*MainWindow.GRID_SIZE)
+                {
+                    collision = true;
+                }
+            }
+            if(collision)
+            {
+                xplayer = currentx;
+                yplayer = currenty;
             }
             Canvas.SetLeft(image, xplayer*MainWindow.GRID_SIZE);
             Canvas.SetTop(image, yplayer*MainWindow.GRID_SIZE);
@@ -96,11 +115,11 @@ namespace objektorientierung
         DispatcherTimer timer = null;
         List<Rechteck> rechtecke = new List<Rechteck>();
 
-        Spieler spieler = new Spieler();
+        Spieler spieler;
         public static int GRID_SIZE = 25;
         public MainWindow()
         {
-            
+            spieler = new Spieler(rechtecke);
 
             InitializeComponent();
             StreamReader reader = new StreamReader("wallsList.txt");
@@ -201,8 +220,8 @@ namespace objektorientierung
                 rectangle.Height = rechtecke[i].laenge;
                 rectangle.Margin = new Thickness(5);
                 myCanvas.Children.Add(rectangle);
-                Canvas.SetLeft(rectangle, y);
-                Canvas.SetTop(rectangle, x);
+                Canvas.SetLeft(rectangle, x);
+                Canvas.SetTop(rectangle, y);
             };
 
             spieler.image = new Image();
